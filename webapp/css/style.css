@@ -1,0 +1,271 @@
+/* 
+.kpiTileContainer{
+    background-color: none;
+    margin: 0.5rem;
+    padding: 0.5rem 0.5rem 0rem 0.5rem;
+}
+
+.kpiTile {
+    width: 8rem !important;
+    height: 6.5rem !important;
+    margin-right: 0.7rem;
+    margin-bottom: 0.7rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.kpiTile .sapMGTHdrContent {
+    height: 0rem;
+}
+
+.sSmartFilerBar{
+    border-radius: 0.8rem;
+}
+
+.tileVBox {
+    padding: 0.5rem!important;
+}
+
+.tileCount {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2b2b2b;
+}
+
+.tileTitle {
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.totalTile {
+    background: #f4f1eb;
+}
+
+.openTile {
+    background: #dcecff;
+}
+
+.warningTile {
+    background: #f9ead7;
+}
+
+.errorTile {
+    background: #fbe1e1;
+}
+
+.successTile {
+    background: #dff1d8;
+}
+
+.smartTableDiv {
+    height: 10px !important;
+}
+
+
+
+.headerPanel{
+    width: fit-content!important;
+}
+.headerPanel .sapMLabel {
+    color: #666;
+}
+
+.headerPanel .sapMText,
+.headerPanel .sapMLnk {
+    font-weight: bold;
+}
+
+
+
+.customPageHeader .sapMBar {
+    background-color: #002060 !important; 
+    border-bottom: none !important;
+}
+
+.customPageHeader .sapMTitle {
+     color: #ffffff !important;
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    font-family: "72", Arial, Helvetica, sans-serif !important;
+    letter-spacing: 0.01rem;
+}
+
+
+
+.smartTable .sapMTitle{
+    color: black!important;
+}
+
+.smartTable .sapUiTableHeaderDataCell.sapUiTableHeaderCellActive .sapMLabel {
+    color: #1B3A6B !important;  
+    font-weight: bold;
+}
+
+.sSmartFilerBar .sapMLabel{
+    color: #1B3A6B !important;  
+    font-weight: 700;
+}
+
+.lbl{
+    color: black !important;
+}
+
+.customPageHeader  .sapMBtnBack>.sapMBtnIcon{
+    color: white !important;
+}
+
+
+ */
+
+
+ /* ===== Design tokens ===== */
+:root {
+    --navy-deep: #0B2D6B;
+    --navy-mid: #1B3A6B;
+    --steel-blue: #2E6FCC;
+    --teal-open: #0F9AA8;
+    --amber-warn: #C9821A;
+    --red-error: #C0392B;
+    --green-success: #1E8A5B;
+    --bg-page: #F3F5F9;
+    --card-border: #E3E7EE;
+}
+
+.customPageHeader {
+    background-color: var(--bg-page);
+}
+
+.customPageHeader .sapMBar {
+    background: linear-gradient(135deg, #0B2D6B 0%, #163E8C 100%) !important;
+}
+
+.customPageHeader .sapMTitle {
+    color: #ffffff !important;
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    font-family: "72", Arial, Helvetica, sans-serif !important;
+    letter-spacing: 0.02rem;
+}
+
+.customPageHeader .sapMBtnBack > .sapMBtnIcon {
+    color: white !important;
+}
+
+/* ===== KPI Tile container ===== */
+.kpiTileContainer {
+    background-color: transparent;
+    margin: 0.5rem;
+    padding: 0.5rem 0.5rem 0rem 0.5rem;
+}
+
+/* ===== Base tile ===== */
+.kpiTile {
+    width: 8.2rem !important;
+    height: 6.7rem !important;
+    margin-right: 0.7rem;
+    margin-bottom: 0.7rem;
+    border-radius: 0.9rem;
+    background: #ffffff;
+    border: 1px solid var(--card-border);
+    border-top: 4px solid transparent;
+    box-shadow: 0 2px 10px rgba(11, 45, 107, 0.08);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.kpiTile:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(11, 45, 107, 0.14);
+    cursor: pointer;
+}
+
+.kpiTile .sapMGTHdrContent {
+    height: 0rem;
+}
+
+.tileVBox {
+    padding: 0.6rem !important;
+}
+
+.tileCount {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #1A1A2E;
+    line-height: 1.1;
+}
+
+.tileTitle {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.02rem;
+    color: #5A6478;
+    margin-top: 0.15rem;
+}
+
+.totalTile { border-top-color: var(--navy-mid); }
+.totalTile .tileCount { color: var(--navy-mid); }
+
+.openTile { border-top-color: var(--teal-open); }
+.openTile .tileCount { color: var(--teal-open); }
+
+.warningTile { border-top-color: var(--amber-warn); background: linear-gradient(180deg, #FFF9F0 0%, #ffffff 40%); }
+.warningTile .tileCount { color: var(--amber-warn); }
+
+.errorTile { border-top-color: var(--red-error); background: linear-gradient(180deg, #FDF2F1 0%, #ffffff 40%); }
+.errorTile .tileCount { color: var(--red-error); }
+
+.successTile { border-top-color: var(--green-success); background: linear-gradient(180deg, #F1FAF5 0%, #ffffff 40%); }
+.successTile .tileCount { color: var(--green-success); }
+
+.sSmartFilerBar, .headertable{
+    border-radius: 0.9rem;
+    background: #ffffff;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 2px 8px rgba(11, 45, 107, 0.06);
+    padding: 0.75rem 1rem;
+}
+
+.sSmartFilerBar .sapMLabel {
+    color: var(--navy-mid) !important;
+    font-weight: 700;
+}
+
+.sSmartFilerBar .sapMBtn.sapMBtnAction {
+    background-color: var(--steel-blue) !important;
+    border-color: var(--steel-blue) !important;
+}
+
+.smartTable {
+    border-radius: 0.9rem;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 2px 8px rgba(11, 45, 107, 0.06);
+}
+
+.smartTable .sapMTitle {
+    color: var(--navy-mid) !important;
+    font-weight: 700 !important;
+}
+
+.smartTable .sapUiTableRowAlternate {
+    background-color: #F6F8FC !important;
+}
+
+
+.headerPanel {
+    width: fit-content !important;
+}
+
+.headerPanel .sapMLabel {
+
+    color: #666;
+}
+
+.headerPanel .sapMText,
+.headerPanel .sapMLnk {
+    font-weight: bold;
+}
+
+.lbl {
+    color: black !important;
+}

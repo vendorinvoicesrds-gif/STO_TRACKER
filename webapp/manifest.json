@@ -1,0 +1,152 @@
+{
+  "_version": "1.53.0",
+  "sap.app": {
+    "id": "stolifecycle",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.25.0",
+      "toolsId": "23edd552-5cc5-4d2f-b889-51a91958cf34"
+    },
+    "dataSources": {
+      "ZTSTO_LIFECYCLE_SB_V2_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZTSTO_LIFECYCLE_SB_V2_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/mainService/ZTSTO_LIFECYCLE_SB_V2_VAN.xml"
+        }
+      },
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZTSTO_LIFECYCLE_SB_V2/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZTSTO_LIFECYCLE_SB_V2_VAN"
+          ],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "ZSTO_TRACKER-Display": {
+          "semanticObject": "ZSTO_TRACKER",
+          "action": "Display",
+          "title": "{{ZSTO_TRACKER-Display.flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "fullWidth": true,
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.114.9",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "stolifecycle.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "stolifecycle.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "Routedashboard",
+          "pattern": ":?query:",
+          "target": [
+            "Targetdashboard"
+          ]
+        },
+        {
+          "name": "Routelifecycledrilldown",
+          "pattern": "lifecycledrilldown/{STOData}",
+          "target": [
+            "Targetlifecycledrilldown"
+          ]
+        }
+      ],
+      "targets": {
+        "Targetdashboard": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "dashboard",
+          "viewName": "dashboard"
+        },
+        "Targetlifecycledrilldown": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "lifecycledrilldown",
+          "viewName": "lifecycledrilldown"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "stolifecycle.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

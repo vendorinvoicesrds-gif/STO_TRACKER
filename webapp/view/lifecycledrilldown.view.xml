@@ -1,0 +1,188 @@
+<mvc:View xmlns:cards="sap.f.cards" controllerName="stolifecycle.controller.lifecycledrilldown"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:ng="sap.suite.ui.commons.networkgraph"
+    xmlns:layout="sap.ui.layout"
+    xmlns:suite="sap.suite.ui.commons">
+    <Page id="page2" title="STO Lifecycle Drilldown" class="customPageHeader" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <IconTabBar id="idTabBar" expandable="false" class="sapUiResponsiveContentPadding">
+
+                <items>
+                    <IconTabFilter id="_IDGenIconTabFilter" key="HEADER" text="Header &amp; Item Data">
+                        <HBox id="_IDGenHBox1" justifyContent="End" class="sapUiTinyMarginBottom">
+                            <Button id="_IDGenButton" text="Create Delivery" type="Emphasized" visible="{= ${detail>/CurrentStage} === 'Delivery Pending' }" press="onCreateDelivery"></Button>
+                            <Button id="_IDGenButton1" text="Post GI" type="Emphasized" visible="{= ${detail>/CurrentStage} === 'Picking Pending' }" press="onPostGI"></Button>
+                            <Button id="_IDGenButton2" text="Post GR" type="Emphasized" visible="{= ${detail>/CurrentStage} === 'GR Pending' }" press="onPostGR"></Button>
+                            <Button id="_IDGenButton3" text="Post Billing" type="Emphasized" visible="{= ${detail>/CurrentStage} === 'Billing Pending' }" press="onPostBilling"></Button>
+                            <Button id="_IDGenButton4" text="Post Invoice" type="Emphasized" visible="{= ${detail>/CurrentStage} === 'Invoice Pending' }" press="onPostInvoice"></Button>
+                        </HBox>
+
+                        <Panel id="_IDGenPanel" class="headerPanel " headerText="Header Data">
+              
+                            <content>
+
+                                <layout:Grid id="_IDGenGrid" defaultSpan="XL3 L3 M6 S12">
+
+
+                                    <VBox id="_IDGenVBox4">
+                                        <Label id="_IDGenLabel" text="STO NUMBER (D101)" />
+                                        <Text id="_IDGenLink" text="{= ${detail>/STONumber} ? ${detail>/STONumber} : '-' }" />
+                                    </VBox>
+
+                                    <VBox id="_IDGenVBox12">
+                                        <Label id="_IDGenLabel2" text="PROCESS TYPE (D103)" />
+                                        <Text id="_IDGenLink1" text="{= ${detail>/ProcessType} ? ${detail>/ProcessType} : '-' }" />
+                                    </VBox>
+
+                                    <VBox id="_IDGenVBox14">
+                                        <Label id="_IDGenLabel3" text="SUPPLYING PLANT (D104)" />
+                                        <Text id="_IDGenText7" text="{= ${detail>/SupplyingPlant} ? ${detail>/SupplyingPlant} : '-' }" />
+                                    </VBox>
+
+                                    <VBox id="_IDGenVBox15">
+                                        <Label id="_IDGenLabel4" text="RECEIVING PLANT (D105)" />
+                                        <Text id="_IDGenText10" text="{= ${detail>/ReceivingPlant} ? ${detail>/ReceivingPlant} : '-' }" />
+                                    </VBox>
+
+                                    <VBox id="_IDGenVBox18">
+                                        <Label id="_IDGenLabel7" text="STO CREATED BY (D113)" />
+                                        <Text id="_IDGenText23" text="{= ${detail>/CreatedBy} ? ${detail>/CreatedBy} : '-' }" />
+                                    </VBox>
+
+                                    <VBox id="_IDGenVBox19">
+                                        <Label id="_IDGenLabel8" text="VENDOR" />
+                                        <Text id="_IDGenText24" text="{= ${detail>/Vendor} ? ${detail>/Vendor} : '-' }" />
+                                    </VBox>
+
+                                    <VBox id="_IDGenVBox20">
+                                        <Label id="_IDGenLabels9" text="CUSTOMER – RECV. PLANT (D112)" />
+                                        <Text id="_IDGenText25" text="{= ${detail>/Customer} ? ${detail>/Customer} : '-' }" />
+                                    </VBox>
+
+                                    <VBox id="_IDGenVBox16">
+                                        <Label id="_IDGenLabel5" text="SUPP. COMPANY CODE (D106)" />
+                                        <Text id="_IDGenText11" text="{= ${detail>/SupplyingCompanyCode} ? ${detail>/SupplyingCompanyCode} : '-' }" />
+                                    </VBox>
+
+                                    <VBox id="_IDGenVBox17">
+                                        <Label id="_IDGenLabel6" text="RECV. COMPANY CODE (D107)" />
+                                        <Text id="_IDGenText22" text="{= ${detail>/ReceivingCompanyCode} ? ${detail>/ReceivingCompanyCode} : '-' }" />
+                                    </VBox>
+                                    <VBox id="_IDGenVBox7" >
+                                        <Label id="_IDGenLabel14" text="STATUS"></Label>
+                                        <ObjectStatus id="_IDGenObjectStatus" text="{detail>/CurrentStage}" inverted="true"></ObjectStatus>
+                                    </VBox>
+
+                                </layout:Grid>
+
+                            </content>
+                        </Panel>
+
+                        <table:Table id="idItemTable" rows="{items>/}" visibleRowCount="5" class="sapUiTinyMarginTop headertable" selectionMode="None">
+
+                            <table:columns>
+
+                                <table:Column id="_IDGenColumn">
+                                    <Label id="_IDGenLabel9" text="Item"/>
+                                    <table:template>
+                                        <Text id="_IDGenText26" text="{items>STOItem}"/>
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="_IDGenColumn1">
+                                    <Label id="_IDGenLabel10" text="Material"/>
+                                    <table:template>
+                                        <Text id="_IDGenText27" text="{items>Material}"/>
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="_IDGenColumn2">
+                                    <Label id="_IDGenLabel11" text="Description"/>
+                                    <table:template>
+                                        <Text id="_IDGenText28" text="{items>MaterialDesc}"/>
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="_IDGenColumn3">
+                                    <Label id="_IDGenLabel12" text="Ordered Qty"/>
+                                    <table:template>
+                                        <Text id="_IDGenText29" text="{items>OrderedQty}"/>
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="_IDGenColumn4">
+                                    <Label id="_IDGenLabel13" text="Open Qty"/>
+                                    <table:template>
+                                        <Text id="_IDGenText30" text="{items>OpenQty}"/>
+                                    </table:template>
+                                </table:Column>
+                                <table:Column id="_IDGenColumn42">
+                                    <Label id="_IDGenLabel132" text="UoM"/>
+                                    <table:template>
+                                        <Text id="_IDGenText302" text="{items>UoM}"/>
+                                    </table:template>
+                                </table:Column>
+
+                            </table:columns>
+
+                        </table:Table>
+
+                    </IconTabFilter>
+                    <IconTabFilter id="_IDGenIconTabFilter2" key="FLOW" text="Process Flow">
+                        <HBox id="_IDGenHBox3" justifyContent="End">
+                             
+                            <Button id="_IDGenButton5" text="Create Delivery" type="Emphasized" visible="{= ${detail>/CurrentStage} === 'Delivery Pending' }" press="onCreateDelivery"></Button>
+                            <Button id="_IDGenButton6" text="Post GI" type="Emphasized" visible="{= ${detail>/CurrentStage} === 'Picking Pending' }" press="onPostGI"></Button>
+                            <Button id="_IDGenButton7" text="Post GR" type="Emphasized" visible="{= ${detail>/CurrentStage} === 'GR Pending' }" press="onPostGR"></Button>
+                            <Button id="_IDGenButton8" text="Post Billing" type="Emphasized" visible="{= ${detail>/CurrentStage} === 'Billing Pending' }" press="onPostBilling"></Button>
+                            <Button id="_IDGenButton9" text="Post Invoice" type="Emphasized" visible="{= ${detail>/CurrentStage} === 'Invoice Pending' }" press="onPostInvoice"></Button>
+                        </HBox>
+
+                        <Panel id="_IDGenPanel1" headerText="STO Lifecycle" class="sapUiSmallMargin">
+
+                            <content>
+
+                                <ng:Graph id="graph" orientation="LeftRight" nodes="{graph>/nodes}" lines="{graph>/lines}">
+
+                                    <ng:nodes >
+
+                                        <ng:Node id="_IDGenNode" key="{graph>key}" title="{graph>title}" status="{graph>status}" shape="Box">
+                                            <ng:content>
+                                                <VBox id="_IDGenVBox13">
+                                                    <HBox id="_IDGenVBox6" class="sapUiSmallMargin" justifyContent="SpaceBetween">
+                                                        <Label id="_IDGenLabel1" text="{= ( ${graph>description} === 'Pending' || ${graph>description} === 'Completed')? 'Status' : 'Document Number' }" class="lbl"/>
+                                                        <HBox id="_IDGenVBox" class="sapUiSmallMarginBegin">
+                                                            <Text id="_IDGenText6" text="{graph>description}" visible="{= (${graph>description} === 'Pending' || ${graph>description} === 'Completed') ? true : false}"/>
+                                                            <Link id="_IDGenL1ink2" text="{graph>description}" visible="{= (${graph>description} === 'Pending' || ${graph>description} === 'Completed') ? false : true}" press="onDocumentPress" />
+                                                        </HBox>
+                                                    </HBox>
+
+                                                </VBox>
+                                            </ng:content>
+
+                                        </ng:Node>
+                                    </ng:nodes>
+
+                                    <ng:lines>
+
+                                        <ng:Line id="_IDGenLine" from="{graph>from}" to="{graph>to}" />
+
+                                    </ng:lines>
+
+                                </ng:Graph>
+
+                            </content>
+
+                        </Panel>
+
+                    </IconTabFilter>
+
+
+                </items>
+
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>

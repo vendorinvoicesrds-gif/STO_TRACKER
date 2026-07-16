@@ -24,7 +24,8 @@ sap.ui.define([
                     ACCOUNTING_FAILED: 0,
                     INVOICE_BLOCKED: 0,
                     COMPLETED: 0,
-                    CHAIN_EXCEPTIONS: 0
+                    CHAIN_EXCEPTIONS: 0,
+                    AGED_STOS: 0
                 }
             });
 
@@ -43,6 +44,90 @@ sap.ui.define([
             this.loadDashboardCounts();
         },
 
+        // loadDashboardCounts: function () {
+
+        //     var oModel = this.getOwnerComponent().getModel();
+        //     var that = this;
+
+        //     oModel.read("/Stats", {
+        //         success: function (oData) {
+
+        //             var oCounts = {
+        //                 TOTAL_STOS: 0,
+        //                 OPEN_STOS: 0,
+        //                 DELIVERY_PENDING: 0,
+        //                 PGI_PENDING: 0,
+        //                 GR_PENDING: 0,
+        //                 BILLING_PENDING: 0,
+        //                 ACCOUNTING_FAILED: 0,
+        //                 INVOICE_BLOCKED: 0,
+        //                 COMPLETED: 0,
+        //                 AGED_STOS: 0
+        //             };
+        //             oModel.read("/Dashboard/$count", {
+        //                 urlParameters: {
+        //                     "$filter": "AgingDays gt 0"
+        //                 },
+        //                 success: function (oCount) {
+        //                     oCounts.AGED_STOS =  parseInt(oCount, 10) || 0;
+        //                     that.getView().getModel("dashboardModel").setProperty("/Counts", oCounts);
+        //                 },
+        //                 error: function (oError) {
+        //                     oCounts.AGED_STOS = 0;
+        //                     console.error("Failed to fetch aged STOs count", oError);
+        //                 }
+        //             });
+
+        //             oData.results.forEach(function (item) {
+
+
+        //                 switch (item.CurrentStage) {
+        //                     case "Billing Pending":
+        //                         oCounts.BILLING_PENDING = item.StageCount;
+        //                         break;
+
+        //                     case "Delivery Pending":
+        //                         oCounts.DELIVERY_PENDING = item.StageCount;
+        //                         break;
+
+        //                     case "GR Pending":
+        //                         oCounts.GR_PENDING = item.StageCount;
+        //                         break;
+
+        //                     case "Picking Pending":
+        //                         oCounts.PGI_PENDING = item.StageCount;
+        //                         break;
+
+        //                     case "Accounting Failed":
+        //                         oCounts.ACCOUNTING_FAILED = item.StageCount;
+        //                         break;
+
+        //                     case "Invoice Pending":
+        //                         oCounts.INVOICE_BLOCKED = item.StageCount;
+        //                         break;
+
+        //                     case "Completed":
+        //                         oCounts.COMPLETED = item.StageCount;
+        //                         break;
+
+        //                     case "Place Holder":
+        //                         oCounts.PLACE_HOLDER = item.StageCount;
+        //                         break;
+
+
+        //                 }
+
+        //             });
+        //             oCounts.OPEN_STOS = oCounts.DELIVERY_PENDING + oCounts.GR_PENDING + oCounts.BILLING_PENDING + oCounts.PGI_PENDING + oCounts.ACCOUNTING_FAILED + oCounts.INVOICE_BLOCKED;
+        //             oCounts.TOTAL_STOS = oCounts.OPEN_STOS + oCounts.COMPLETED;
+        //             that.getView().getModel("dashboard").setProperty("/counts", oCounts);
+        //             that.getView().setBusy(false);
+
+
+        //         }
+        //     });
+
+        // },
         loadDashboardCounts: function () {
 
             var oModel = this.getOwnerComponent().getModel();
@@ -61,58 +146,67 @@ sap.ui.define([
                         ACCOUNTING_FAILED: 0,
                         INVOICE_BLOCKED: 0,
                         COMPLETED: 0,
+                        AGED_STOS: 0
                     };
 
                     oData.results.forEach(function (item) {
-
                         switch (item.CurrentStage) {
                             case "Billing Pending":
                                 oCounts.BILLING_PENDING = item.StageCount;
                                 break;
-
                             case "Delivery Pending":
                                 oCounts.DELIVERY_PENDING = item.StageCount;
                                 break;
-
                             case "GR Pending":
                                 oCounts.GR_PENDING = item.StageCount;
                                 break;
-
                             case "Picking Pending":
                                 oCounts.PGI_PENDING = item.StageCount;
                                 break;
-
                             case "Accounting Failed":
                                 oCounts.ACCOUNTING_FAILED = item.StageCount;
                                 break;
-
                             case "Invoice Pending":
                                 oCounts.INVOICE_BLOCKED = item.StageCount;
                                 break;
-
                             case "Completed":
                                 oCounts.COMPLETED = item.StageCount;
                                 break;
-
                             case "Place Holder":
                                 oCounts.PLACE_HOLDER = item.StageCount;
                                 break;
-
-
                         }
-
                     });
-                    oCounts.OPEN_STOS = oCounts.DELIVERY_PENDING + oCounts.GR_PENDING + oCounts.BILLING_PENDING + oCounts.PGI_PENDING + oCounts.ACCOUNTING_FAILED + oCounts.INVOICE_BLOCKED;
+
+                    oCounts.OPEN_STOS = oCounts.DELIVERY_PENDING + oCounts.GR_PENDING + oCounts.BILLING_PENDING
+                        + oCounts.PGI_PENDING + oCounts.ACCOUNTING_FAILED + oCounts.INVOICE_BLOCKED;
                     oCounts.TOTAL_STOS = oCounts.OPEN_STOS + oCounts.COMPLETED;
-                    that.getView().getModel("dashboard").setProperty("/counts", oCounts);
+
+                    // fire $count after everything else is computed
+                    oModel.read("/Dashboard/$count", {
+                        urlParameters: {
+                            "$filter": "AgingDays gt 0"
+                        },
+                        success: function (oCount) {
+                            oCounts.AGED_STOS = parseInt(oCount, 10) || 0;
+                            that.getView().getModel("dashboard").setProperty("/counts", oCounts);
+                            that.getView().setBusy(false);
+                        },
+                        error: function (oError) {
+                            oCounts.AGED_STOS = 0;
+                            console.error("Failed to fetch aged STOs count", oError);
+                            that.getView().getModel("dashboard").setProperty("/counts", oCounts);
+                            that.getView().setBusy(false);
+                        }
+                    });
+                },
+                error: function (oError) {
+                    console.error("Failed to fetch dashboard stats", oError);
                     that.getView().setBusy(false);
-
-
                 }
             });
 
         },
-
         onSearch: function () {
         },
 
@@ -155,6 +249,9 @@ sap.ui.define([
 
                 case "OPEN STOs":
                     this._sCurrentStage = "Open";
+                    break;
+                case "AGED STOs":
+                    this._sCurrentStage = "Aged";
                     break;
 
                 default:
@@ -203,7 +300,16 @@ sap.ui.define([
                             and: false
                         })
                     );
-                } else {
+                } else if (this._sCurrentStage === "Aged") {
+                    var oFilter = new sap.ui.model.Filter(
+                        "AgingDays",
+                        sap.ui.model.FilterOperator.GT,
+                        0
+                    );
+                    mBindingParams.filters.push(oFilter);
+
+                } 
+                else {
                     var oFilter = new sap.ui.model.Filter(
                         "CurrentStage",
                         sap.ui.model.FilterOperator.EQ,

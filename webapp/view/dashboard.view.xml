@@ -119,6 +119,19 @@
                         </VBox>
                     </TileContent>
                 </GenericTile>
+
+                    <GenericTile id="_IDGenGenericTile121"
+                    class="kpiTile totalTile"
+                    tooltip="View aged STOs"
+                    press="onTilePress">
+
+                    <TileContent id="_IDGenTileContent180">
+                        <VBox id="_IDGenVBox11mm" class="tileVBox">
+                            <Text id="_IDGenText180" text="{dashboard>/counts/AGED_STOS}" class="tileCount"/>
+                            <Text id="_IDGenText181" text="AGED STOs" class="tileTitle"/>
+                        </VBox>
+                    </TileContent>
+                </GenericTile>
             </HBox>
 
             <smartFilterBar:SmartFilterBar
@@ -138,7 +151,7 @@
                     header="{dashboard>/CurrentStage}" initialise="onSmartTableInitialise" 
                     beforeRebindTable="onBeforeRebindTable"
                     class="smartTable sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginBottom" height="45%"
-                    requestAtLeastFields="CreatedBy,SupplyingCompanyCode,ReceivingCompanyCode,Customer,ProcessType,Vendor">
+                    requestAtLeastFields="CreatedBy,SupplyingCompanyCode,ReceivingCompanyCode,Customer,ProcessType,Vendor,AgingDays">
 
                     <table:Table id="_IDGenTable"
                         selectionMode="None"

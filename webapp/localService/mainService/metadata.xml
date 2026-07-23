@@ -72,16 +72,22 @@
                     <PropertyRef Name="STONumber"/>
                     <PropertyRef Name="STOItem"/>
                 </Key>
-                <Property Name="STONumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number" sap:value-list="standard"/>
-                <Property Name="STOItem" Type="Edm.String" Nullable="false" MaxLength="5" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Item Number of Purchasing Document"/>
+                <Property Name="CreateDocument_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="STONumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
+                <Property Name="STOItem" Type="Edm.String" Nullable="false" MaxLength="5" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Item Number of Purchasing Document" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ShippingPoint" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Shipping Point" sap:quickinfo="Shipping Point / Receiving Point"/>
                 <Property Name="DeliveryNumber" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Material Document" sap:quickinfo="Number of Material Document"/>
                 <Property Name="DeliveryItem" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Delivery Item"/>
+                <Property Name="Salesorg" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales Organization"/>
                 <Property Name="DeliveryItemCategory" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Item Category" sap:quickinfo="Delivery Item Category"/>
                 <Property Name="DeliveryQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="DeliveryUnit" sap:label="Delivery Quantity" sap:quickinfo="Actual quantity delivered (in sales units)"/>
                 <Property Name="DeliveryUnit" Type="Edm.String" MaxLength="3" sap:label="Sales Unit" sap:semantics="unit-of-measure"/>
                 <Property Name="DeliveryCreationStatus" Type="Edm.String" MaxLength="7"/>
                 <Property Name="PlannedGoodsMovementDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Pland Gds Mvmnt Date" sap:quickinfo="Planned Goods Movement Date"/>
                 <Property Name="ActualGoodsMovementDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Act. Gds Mvmnt Date" sap:quickinfo="Actual Goods Movement Date"/>
+                <Property Name="DeliveryDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Delivery Date"/>
+                <Property Name="AgingDays" Type="Edm.Int32" sap:label="OverDue Days"/>
+                <Property Name="BusinessPlace" Type="Edm.String" MaxLength="4"/>
                 <Property Name="BillingBlock" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Billing Block" sap:quickinfo="Billing Block in SD Document"/>
                 <Property Name="PickingStatus" Type="Edm.String" MaxLength="9"/>
                 <Property Name="BillingDocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Billing Document"/>
@@ -113,6 +119,7 @@
                 <Property Name="Customer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer" sap:quickinfo="Customer Number"/>
                 <Property Name="SupplyingPlant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:text="SupplyingPlantName" sap:label="Supplying Plant" sap:quickinfo="Plant" sap:value-list="standard"/>
                 <Property Name="SupplyingPlantName" Type="Edm.String" MaxLength="30" sap:label="Name 1" sap:quickinfo="Name"/>
+                <Property Name="StorageLocation" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Storage Location"/>
                 <Property Name="SupplyingCompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Supplying Company Code" sap:quickinfo="Company Code"/>
                 <Property Name="ReceivingPlant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:text="ReceivingPlantName" sap:label="Receiving Plant" sap:quickinfo="Plant" sap:value-list="standard"/>
                 <Property Name="ReceivingPlantName" Type="Edm.String" MaxLength="30" sap:label="Name 1" sap:quickinfo="Name"/>
@@ -122,13 +129,17 @@
                 <Property Name="CombinedMaterial" Type="Edm.String" MaxLength="81"/>
                 <Property Name="OrderedQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="UoM" sap:label="Order Quantity" sap:quickinfo="Purchase Order Quantity"/>
                 <Property Name="UoM" Type="Edm.String" MaxLength="3" sap:label="Order Unit" sap:quickinfo="Purchase Order Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="NetPrice" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="POCurrency" sap:variable-scale="true" sap:label="Net Order Value" sap:quickinfo="Net Order Value in PO Currency"/>
+                <Property Name="GrossPrice" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="POCurrency" sap:variable-scale="true" sap:label="Gross order value" sap:quickinfo="Gross order value in PO currency"/>
+                <Property Name="POCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
+                <Property Name="TaxCode" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Tax Code" sap:quickinfo="Tax on sales/purchases code"/>
                 <Property Name="CombinedOrderQty" Type="Edm.String" MaxLength="24"/>
                 <Property Name="PurchasingGroup" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Purchasing Group"/>
                 <Property Name="PurchasingOrg" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Purch. Organization" sap:quickinfo="Purchasing Organization" sap:value-list="standard"/>
                 <Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="User of person who created a purchasing document"/>
                 <Property Name="CreatedOn" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:label="Purchase Order Created on" sap:quickinfo="Creation Date of Purchasing Document"/>
                 <Property Name="ProcessType" Type="Edm.String" MaxLength="5" sap:value-list="standard"/>
-                <Property Name="CurrentStage" Type="Edm.String" MaxLength="27"/>
+                <Property Name="CurrentStage" Type="Edm.String" MaxLength="16"/>
             </EntityType>
             <EntityType Name="ZTSTO_MATERIAL_VHType" sap:label="ValueHelp for Materials" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -141,7 +152,7 @@
                 <Key>
                     <PropertyRef Name="CurrentStage"/>
                 </Key>
-                <Property Name="CurrentStage" Type="Edm.String" Nullable="false" MaxLength="27"/>
+                <Property Name="CurrentStage" Type="Edm.String" Nullable="false" MaxLength="16"/>
                 <Property Name="StageCount" Type="Edm.Int32"/>
             </EntityType>
             <EntityType Name="ZTSTO_PO_VHType" sap:label="ValueHelp for PO Numbers" sap:value-list="true" sap:content-version="1">
@@ -455,6 +466,10 @@
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_Hierarchy"/>
                     <End EntitySet="SAP__HierarchySet" Role="ToRole_to_Hierarchy"/>
                 </AssociationSet>
+                <FunctionImport Name="CreateDocument" ReturnType="cds_ztsto_lifecycle_sd.DashboardType" EntitySet="Dashboard" m:HttpMethod="POST" sap:action-for="cds_ztsto_lifecycle_sd.DashboardType" sap:applicable-path="CreateDocument_ac">
+                    <Parameter Name="STONumber" Type="Edm.String" Mode="In" MaxLength="10" sap:label="Purchasing Document"/>
+                    <Parameter Name="STOItem" Type="Edm.String" Mode="In" MaxLength="5" sap:label="Item"/>
+                </FunctionImport>
             </EntityContainer>
             <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
             <Annotations Target="cds_ztsto_lifecycle_sd.DashboardType/STONumber" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -616,9 +631,6 @@
                             <Collection>
                                 <Record Type="Common.ValueListParameterInOut">
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="PurchasingOrg"/>
-                                    <PropertyValue Property="ValueListProperty" String="ekorg"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
                                     <PropertyValue Property="ValueListProperty" String="PurchasingOrganization"/>
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
@@ -664,6 +676,23 @@
                                     <PropertyValue Property="Property" PropertyPath="CreatedOn"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
                                 </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>CreateDocument_ac</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>CreateDocument_ac</PropertyPath>
                             </Collection>
                         </PropertyValue>
                     </Record>

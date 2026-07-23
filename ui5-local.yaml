@@ -47,3 +47,8 @@ server:
         annotations:
           - localPath: ./webapp/localService/mainService/ZTSTO_LIFECYCLE_SB_V2_VAN.xml
             urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZTSTO_LIFECYCLE_SB_V2_VAN',Version='0001')/$value/
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**

@@ -128,7 +128,7 @@
                     <TileContent id="_IDGenTileContent180">
                         <VBox id="_IDGenVBox11mm" class="tileVBox">
                             <Text id="_IDGenText180" text="{dashboard>/counts/AGED_STOS}" class="tileCount"/>
-                            <Text id="_IDGenText181" text="AGED STOs" class="tileTitle"/>
+                            <Text id="_IDGenText181" text="OVERDUE STOs" class="tileTitle"/>
                         </VBox>
                     </TileContent>
                 </GenericTile>
@@ -151,8 +151,7 @@
                     header="{dashboard>/CurrentStage}" initialise="onSmartTableInitialise" 
                     beforeRebindTable="onBeforeRebindTable"
                     class="smartTable sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginBottom" height="45%"
-                    requestAtLeastFields="CreatedBy,SupplyingCompanyCode,ReceivingCompanyCode,Customer,ProcessType,Vendor,AgingDays">
-
+                   requestAtLeastFields="STONumber,STOItem,Material,MaterialDesc,SupplyingPlant,ReceivingPlant,ProcessType,CreatedOn,CurrentStage,OpenQty,OrderedQty,UoM,PlannedGoodsMovementDate,ActualGoodsMovementDate,PGIPostingDate,BillingNetAmount,Currency,AgingDays,CreatedBy,SupplyingCompanyCode,ReceivingCompanyCode,Customer,Vendor">
                     <table:Table id="_IDGenTable"
                         selectionMode="None"
                         visibleRowCount="5"

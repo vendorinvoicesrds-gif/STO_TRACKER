@@ -328,7 +328,7 @@
 //             // mBindingParams.parameters = mBindingParams.parameters || {};
 //             // mBindingParams.parameters.select = aFields.join(",");
 
-            
+
 
 //             if (this._sCurrentStage) {
 
@@ -1232,6 +1232,28 @@ sap.ui.define([
                     STOData: encodeURIComponent(JSON.stringify(oData))
                 }
             );
+        },
+        _navigateToApp: function (sSemanticObject, sAction) {
+            this.getView().setBusy(true);
+            if (sap.ushell && sap.ushell.Container) {
+                sap.ushell.Container.getService("CrossApplicationNavigation").toExternal({
+                    target: {
+                        semanticObject: sSemanticObject,
+                        action: sAction
+                    }
+                });
+            } else {
+                this.getView().setBusy(false);
+                sap.m.MessageToast.show("Cross Application Navigation is only available in Fiori Launchpad.");
+            }
+        },
+
+        onCheckSTOConfiguration: function () {
+            this._navigateToApp("ZSTO_CONFIG", "display");
+        },
+
+        onCreatePo: function () {
+            this._navigateToApp("PurchaseOrder", "create");
         }
 
     });

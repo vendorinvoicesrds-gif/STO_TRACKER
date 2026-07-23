@@ -7,7 +7,18 @@
     xmlns:table="sap.ui.table"
     displayBlock="true">
 
-    <Page id="page" title="STO Operations Cockpit" class="customPageHeader">
+    <Page id="page"  class="customPageHeader">
+        <customHeader >
+            <Bar id="_IDGenBar" >
+                <contentLeft >
+                    <Title id="_IDGenTitle" text="STO Operations Cockpit"></Title>
+                </contentLeft>
+                <contentRight>
+                    <Button id="_IDGenButton11" text="Create PO" type="Unstyled" press="onCreatePo"></Button>
+                    <Button id="_IDGenButton12" text="Check STO Configuration"  type="Unstyled" press="onCheckSTOConfiguration"></Button>
+                </contentRight>
+            </Bar>
+        </customHeader>
 
         <content >
            
